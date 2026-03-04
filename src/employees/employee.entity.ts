@@ -31,8 +31,8 @@ export class Employee {
   })
   status: EmployeeStatus;
 
-  @Column({ nullable: true })
-  avatarUrl: string;
+  @Column({ type: 'varchar', nullable: true, default: null })
+  avatarUrl: string | null;
 
   @CreateDateColumn()
   createdAt: Date;

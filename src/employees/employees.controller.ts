@@ -4,8 +4,8 @@ import {
   Post,
   Patch,
   Delete,
-  Body,
   Param,
+  Body,
   UseInterceptors,
   UploadedFile,
   ParseUUIDPipe,
@@ -19,7 +19,11 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { EmployeesService } from './employees.service';
-import { CreateEmployeeDto, UpdateEmployeeDto, UpdateStatusDto } from './employee.dto';
+import {
+  CreateEmployeeDto,
+  UpdateEmployeeDto,
+  UpdateStatusDto,
+} from './employee.dto';
 import type { Request } from 'express';
 
 const avatarStorage = diskStorage({
@@ -96,5 +100,9 @@ export class EmployeesController {
     }
     const baseUrl = `${req.protocol}://${req.get('host')}`;
     return this.employeesService.updateAvatar(id, file.filename, baseUrl);
+  }
+  @Delete(':id/avatar')
+  removeAvatar(@Param('id', ParseUUIDPipe) id: string) {
+    return this.employeesService.removeAvatar(id);
   }
 }
